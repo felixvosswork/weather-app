@@ -4,7 +4,7 @@ import { useState } from "react";
 function Search({ setResult }) {
   const [location, setLocation] = useState("");
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&lang=de&appid=9fd09dd817f5adb0e6dce7a06f1d1996`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&lang=de&units=imperial&appid=9fd09dd817f5adb0e6dce7a06f1d1996`;
 
   const searchLocation = (e) => {
     e.preventDefault();

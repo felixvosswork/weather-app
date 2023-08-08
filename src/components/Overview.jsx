@@ -1,5 +1,8 @@
 function Overview({ result }) {
-  const { name } = result;
+  const {
+    name,
+    main: { temp },
+  } = result;
   return (
     <div className="container pt-10">
       <div className="w-full name">
@@ -10,7 +13,7 @@ function Overview({ result }) {
         <div className="w-1/3">
           <div className="flex items-end">
             <span className="icon me-20">ICON</span>
-            <h2 className="text-9xl">5°</h2>
+            <h2 className="text-9xl">{temp.toFixed()}°</h2>
             <h3 className="text-2xl mt-3">wolkig</h3>
           </div>
         </div>

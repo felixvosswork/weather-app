@@ -6,7 +6,7 @@ import Forecast from "./components/Forecast";
 import { useState } from "react";
 
 function App() {
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState("");
   return (
     <div className="container mx-auto py-20 px-4">
       <Heading />

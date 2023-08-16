@@ -1,18 +1,60 @@
 import axios from "axios";
 import { useState } from "react";
+import Overview from "./Overview";
+import Forecast from "./Forecast";
 
-function Search({ setResult }) {
+function Search() {
   const [location, setLocation] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&lang=de&units=metric&appid=9fd09dd817f5adb0e6dce7a06f1d1996`;
+  const urlOverview = `https://api.openweathermap.org/data/2.5/weather?q=${location}&lang=de&units=metric&appid=9fd09dd817f5adb0e6dce7a06f1d1996`;
+  const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&lang=de&units=metric&appid=9fd09dd817f5adb0e6dce7a06f1d1996`;
 
   const searchLocation = (e) => {
     e.preventDefault();
-    axios.get(url).then((response) => {
-      const result = response.data;
-      console.log(result);
-      setResult(result);
-    });
+    axios
+      .get(urlOverview)
+      .then((response) => {
+        const {
+          name,
+          id,
+          main: { temp, temp_max, temp_min, humidity },
+          sys: { country },
+          weather,
+          wind: { speed },
+        } = response.data;
+        setWeatherData({
+          city: name,
+          country: country,
+          temperatur: temp,
+          tempMax: temp_max,
+          tempMin: temp_min,
+          feucht: humidity,
+          windspeed: speed,
+          weather: weather,
+          id: id,
+        });
+      })
+      .catch((error) => {
+        console.log("fehler", error);
+      });
+    axios
+      .get(urlForecast)
+      .then((response) => {
+        const { list } = response.data;
+        const shortendList = list.splice(1, 6).map((item) => {
+          return {
+            foreTemp: item.main.temp,
+            foreIcon: item.weather[0].icon,
+            time: item.dt,
+          };
+        });
+        setForecastData(shortendList);
+      })
+      .catch((error) => {
+        console.log("fehler", error);
+      });
   };
 
   return (
@@ -34,6 +76,8 @@ function Search({ setResult }) {
           suchen
         </button>
       </form>
+      {weatherData && <Overview weather={weatherData} />}
+      {forecastData && <Forecast forecast={forecastData} />}
     </>
   );
 }

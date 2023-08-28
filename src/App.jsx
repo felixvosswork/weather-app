@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function App() {
   return (
-    <div className="container mx-auto py-20 px-4">
+    <div className="container mx-auto pt-10 px-4">
       <Heading />
       <Search />
     </div>

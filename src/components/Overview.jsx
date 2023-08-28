@@ -8,15 +8,21 @@ function Overview(props) {
     feucht,
     windspeed,
     weather,
+    time,
+    sunrise,
+    sunset,
   } = props.weather;
   return (
     <>
-      <div className="container pt-10">
+      <div className="container pt-20">
         <div className="w-full name">
           <h1 className="text-7xl font-semibold mb-5">
             {city}, {country}
           </h1>
-          <h2 className="text-2xl"></h2>
+          <h2 className="text-2xl">
+            {new Date(`${time}` * 1000).toLocaleDateString()},
+            {new Date(`${time}` * 1000).toISOString().slice(11, -8)} Uhr
+          </h2>
         </div>
         <div className="flex mt-10 mb-10 weather-now">
           <div className="w-1/3">
@@ -53,11 +59,15 @@ function Overview(props) {
                 <p>Feuchtigkeit</p>
               </div>
               <div>
-                <p>°</p>
+                <p>
+                  {new Date(`${sunrise}` * 1000).toISOString().slice(11, -8)}
+                </p>
                 <p>Sonnenaufgang</p>
               </div>
               <div>
-                <p>°</p>
+                <p>
+                  {new Date(`${sunset}` * 1000).toISOString().slice(11, -8)}
+                </p>
                 <p>Sonnenuntergang</p>
               </div>
             </div>

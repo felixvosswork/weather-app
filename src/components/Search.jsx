@@ -66,11 +66,6 @@ function Search() {
       });
   };
 
-  const resetData = () => {
-    setWeatherData("");
-    setForecastData("");
-  };
-
   return (
     <>
       <div className="searchbar">
@@ -89,12 +84,6 @@ function Search() {
             type="submit"
           >
             suchen
-          </button>
-          <button
-            className="px-4 py-1 text-zinc-800 rounded-md shadow-sm bg-white"
-            onClick={resetData}
-          >
-            zurücksetzten
           </button>
         </form>
       </div>

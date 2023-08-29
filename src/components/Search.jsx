@@ -27,7 +27,6 @@ function Search() {
           weather,
           wind: { speed },
         } = response.data;
-        console.log(response.data);
         setWeatherData({
           city: name,
           country: country,
@@ -68,8 +67,8 @@ function Search() {
   };
 
   const resetData = () => {
-    setWeatherData(null);
-    setForecastData(null);
+    setWeatherData("");
+    setForecastData("");
   };
 
   return (
@@ -93,12 +92,7 @@ function Search() {
           </button>
           <button
             className="px-4 py-1 text-zinc-800 rounded-md shadow-sm bg-white"
-            onClick={(e) => {
-              setLocation(e.target.value);
-              e.preventDefault();
-              resetData;
-            }}
-            value={""}
+            onClick={resetData}
           >
             zurücksetzten
           </button>
@@ -150,7 +144,6 @@ function Search() {
         weatherData && <Overview weather={weatherData} />
       )}
       {isError ? "" : forecastData && <Forecast forecast={forecastData} />}
-      {/* {Object.keys(location).length === 0 ? "scheiße" : "pisse"} */}
     </>
   );
 }

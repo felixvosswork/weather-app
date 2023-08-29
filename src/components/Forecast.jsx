@@ -1,6 +1,5 @@
 function Forecast(props) {
   const forecasted = props.forecast;
-  console.log(forecasted);
   return (
     <div className="container mt-10">
       <h3 className="text-3xl mb-5">Wettervorhersage</h3>
